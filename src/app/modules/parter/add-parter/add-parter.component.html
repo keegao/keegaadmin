@@ -1,0 +1,197 @@
+<div class="card mb-5 mb-xl-10">
+    <div 
+      class="card-header border-0 cursor-pointer"
+      role="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#kt_account_profile_details"
+      aria-expanded="true"
+      aria-controls="kt_account_profile_details"
+    >
+      <div class="card-title m-0">
+        <h3 class="fw-bolder m-0">Ajouter un agent commercial</h3>
+      </div>
+    </div>
+    <div id="kt_account_profile_details" class="collapse show">
+      <form  #f="ngForm" novalidate="" class="form" [formGroup]="profileForm">
+        <div class="card-body border-top p-9">
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
+            <div class="col-lg-8">
+            
+  
+                <img  [src]="imgURL" (click)="triggerFile()"   class="rounded-circle img-fluid img-thumbnail"  style="height:150px;width: 150px;"  id="preview" >
+      
+              
+  
+                <div class="mb-3 mt-2">
+                  <span style="color:red;" ></span>
+                
+                  <input style="display: none !important;"  #fileInput   class="form-control"  #file type="file" accept='image/*'  id="formFile" (change)="selectFile($event,file.files)"  /> 
+                </div>
+          
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Nom</label
+            >
+            <div class="col-lg-8">
+              <div class="row">
+                <div class="col-lg-6 fv-row">
+                  <input
+                    type="text"
+                    class="
+                      form-control form-control-lg form-control-solid
+                      mb-3 mb-lg-0
+                    "
+                    placeholder="Nom"
+                    formControlName="nom"
+                    [ngClass]="{
+                        'is-invalid': profileForm.controls['nom'].invalid && profileForm.controls['nom'].touched ,
+                        'is-valid': profileForm.controls['nom'].valid && profileForm.controls['nom'].touched 
+                      }"
+                 
+                  />
+                </div>
+                <div class="col-lg-6 fv-row">
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    placeholder="Prénom"
+                    formControlName="prenom"
+                    [ngClass]="{
+                        'is-invalid': profileForm.controls['prenom'].invalid && profileForm.controls['prenom'].touched ,
+                        'is-valid': profileForm.controls['prenom'].valid && profileForm.controls['prenom'].touched
+                      }"
+             
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Numéro CNI</label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="num_cni"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['num_cni'].invalid && profileForm.controls['num_cni'].touched ,
+                    'is-valid': profileForm.controls['num_cni'].valid && profileForm.controls['num_cni'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              ><span class="required">Email</span></label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Email"
+                name="contactPhone"
+                formControlName="email"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['email'].invalid && profileForm.controls['email'].touched ,
+                    'is-valid': profileForm.controls['email'].valid && profileForm.controls['email'].touched 
+                  }"
+         
+        
+              />
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              ><span class="required">Numéro de telephone</span></label
+            >
+            <div class="col-lg-8 fv-row">
+
+          
+              <input
+            
+          
+              class="form-control form-control-lg form-control-solid"
+                placeholder="Numéro de telephone"
+                name="contactPhone"
+                formControlName="num_tel"
+                (click)="test()"
+
+                ng2TelInput 
+                [ng2TelInputOptions]="{initialCountry: 'cm'}"
+                (intlTelInputObject)="telInputObject($event)"
+                (countryChange)="onCountryChange($event)"
+
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['num_tel'].invalid && profileForm.controls['num_tel'].touched ,
+                    'is-valid': profileForm.controls['num_tel'].valid && profileForm.controls['num_tel'].touched 
+                  }"
+              
+         
+         
+              />
+            </div>
+          </div>
+     
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              ><span >Pays</span></label
+            >
+            <div class="col-lg-8 fv-row">
+              <select
+                class="form-select form-select-solid form-select-lg fw-bold"
+                name="country"
+                formControlName="pays"
+            
+              >
+              <option value="">Selectionner un pays...</option>
+          <option  *ngFor="let country of countrie"  [value]="country.name">{{country.name}}</option> -
+              </select>
+              <!-- <div class="fv-plugins-message-container">
+                <div class="fv-help-block">Country is required</div>
+              </div> -->
+            </div>
+          </div>
+
+
+        
+    
+      
+         
+      </div>
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+          <button
+            type="button"
+            class="btn btn-primary"
+
+            [disabled]="profileForm .invalid"
+        
+  
+            (click)="uploadFiles()"
+       
+          >
+         <span *ngIf="isLoading==false">Enregister</span>
+            <div *ngIf="isLoading==true"> 
+              <span class="indicator-progress" [style.display]="'block'">
+             Veuillez patienter...{{ " " }}
+                <span
+                  class="spinner-border spinner-border-sm align-middle ms-2"
+                ></span>
+              </span>
+            </div>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  
+  
+  

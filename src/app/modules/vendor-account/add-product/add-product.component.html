@@ -1,0 +1,373 @@
+<div class="card mb-5 mb-xl-10">
+    <div 
+      class="card-header border-0 cursor-pointer"
+      role="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#kt_account_profile_details"
+      aria-expanded="true"
+      aria-controls="kt_account_profile_details"
+    >
+      <div class="card-title m-0">
+        <h3 class="fw-bolder m-0">Ajouter un article</h3>
+      </div>
+    </div>
+    <div id="kt_account_profile_details" class="collapse show">
+        
+      <form  novalidate="" class="form" [formGroup]="profileForm">
+<div class="row border-top">
+ <div class="col-md-9">
+        <div class="card-body  p-9">
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">image du prduit</label>
+            <div class="col-lg-8">
+            
+  
+                <img  [src]="imgURL" (click)="triggerFile()"   class="img-fluid img-thumbnail"  style="height:150px;width: 150px;"  id="preview" >
+      
+              
+  
+                <div class="mb-3 mt-2">
+                  <span style="color:red;" ></span>
+                
+                  <input style="display: none !important;"  #fileInput   class="form-control"  #file type="file" accept='image/*'  id="formFile" (change)="selectFile($event,file.files)"  /> 
+                </div>
+          
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Nom</label
+            >
+            <div class="col-lg-8">
+              <div class="row">
+                <div class="col-lg-12 fv-row">
+                  <input
+                    type="text"
+                    class="
+                      form-control form-control-lg form-control-solid
+                      mb-3 mb-lg-0
+                    "
+                    placeholder="Nom"
+                    formControlName="nom"
+                    [ngClass]="{
+                        'is-invalid': profileForm.controls['nom'].invalid && profileForm.controls['nom'].touched ,
+                        'is-valid': profileForm.controls['nom'].valid && profileForm.controls['nom'].touched 
+                      }"
+                 
+                  />
+                </div>
+              
+              </div>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Tarif régulier(en FCFA) </label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="tarif_r"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['tarif_r'].invalid && profileForm.controls['tarif_r'].touched ,
+                    'is-valid': profileForm.controls['tarif_r'].valid && profileForm.controls['tarif_r'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+
+        
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              > En stock </label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+              class="form-check-input" [checked]="stock == 1" type="checkbox" value="promo" id="flexCheckDefault"
+                   value="1"
+             
+        
+              />
+            </div>
+          </div>
+      
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              >Poids en kg </label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="poids"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['poids'].invalid && profileForm.controls['poids'].touched ,
+                    'is-valid': profileForm.controls['poids'].valid && profileForm.controls['poids'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+
+          
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              >Longueur </label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="lg"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['lg'].invalid && profileForm.controls['lg'].touched ,
+                    'is-valid': profileForm.controls['lg'].valid && profileForm.controls['lg'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+
+
+          
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              >Largeur </label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="larg"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['larg'].invalid && profileForm.controls['larg'].touched ,
+                    'is-valid': profileForm.controls['larg'].valid && profileForm.controls['larg'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+
+       
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              >Hauteur </label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="hauteur"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['hauteur'].invalid && profileForm.controls['hauteur'].touched ,
+                    'is-valid': profileForm.controls['hauteur'].valid && profileForm.controls['hauteur'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+     
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              ><span >Couleur</span></label
+            >
+            <div class="col-lg-8 fv-row">
+              <select
+                class="form-select form-select-solid form-select-lg fw-bold"
+                name="couleur"
+                formControlName="couleur"
+            
+              >
+              <option value="">Selectionner un couleur...</option>
+          <option  *ngFor="let coul of couleur"  [value]="coul">{{coul}}</option> -
+              </select>
+              <!-- <div class="fv-plugins-message-container">
+                <div class="fv-help-block">Country is required</div>
+              </div> -->
+            </div>
+          </div>
+
+
+          
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              ><span >Taille</span></label
+            >
+            <div class="col-lg-8 fv-row">
+              <select
+                class="form-select form-select-solid form-select-lg fw-bold"
+                name="taille"
+                formControlName="taille"
+            
+              >
+              <option value="">Selectionner une taille...</option>
+          <option  *ngFor="let taille  of taille"  [value]="taille">{{taille}}</option> -
+              </select>
+              <!-- <div class="fv-plugins-message-container">
+                <div class="fv-help-block">Country is required</div>
+              </div> -->
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              >Description</label
+            >
+            <div class="col-lg-8 fv-row">
+
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                formControlName="description"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['description'].invalid && profileForm.controls['description'].touched ,
+                    'is-valid': profileForm.controls['description'].valid && profileForm.controls['description'].touched 
+                  }"
+                
+                ></textarea>
+          
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              > En promotion </label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+              class="form-check-input" [checked]="promo == 1" type="checkbox" value="promo" id="flexCheckDefault"
+                   value="1"
+             
+                   (change)="changeStatus($event)"
+              />
+            </div>
+          </div>
+
+          <div *ngIf="promo==1">
+
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-bold fs-6"
+                  >Tarif promotion(en FCFA) </label
+                >
+                <div class="col-lg-8 fv-row">
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+             
+                    formControlName="tarif_p"
+                    [ngClass]="{
+                        'is-invalid': profileForm.controls['tarif_p'].invalid && profileForm.controls['tarif_p'].touched ,
+                        'is-valid': profileForm.controls['tarif_p'].valid && profileForm.controls['tarif_p'].touched 
+                      }"
+            
+                  />
+                </div>
+              </div>
+
+              <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-bold fs-6"
+                  >Début promotion </label>
+                <div class="col-lg-8 fv-row">
+             
+                  <input type="text" ngbDatepicker #d="ngbDatepicker"   formControlName="debut_p"
+                  class="form-control form-control-lg form-control-solid"
+                  (click)="d.toggle()"
+                  
+                  [ngClass]="{
+                    'is-invalid': profileForm.controls['debut_p'].invalid && profileForm.controls['debut_p'].touched ,
+                    'is-valid': profileForm.controls['debut_p'].valid && profileForm.controls['debut_p'].touched 
+                  }"
+                  />
+              
+                </div>
+              </div>
+
+
+              <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-bold fs-6"
+                  >Fin promotion </label
+                >
+                <div class="col-lg-8 fv-row">
+                  <input
+                    type="texte"
+                    class="form-control form-control-lg form-control-solid"
+                    ngbDatepicker #c="ngbDatepicker" 
+                    (click)="c.toggle()"
+                    formControlName="fin_p"
+                    [ngClass]="{
+                        'is-invalid': profileForm.controls['fin_p'].invalid && profileForm.controls['fin_p'].touched ,
+                        'is-valid': profileForm.controls['fin_p'].valid && profileForm.controls['fin_p'].touched 
+                      }"
+            
+                  />
+                </div>
+              </div>
+          </div>
+
+         
+
+
+         
+
+        
+    
+      
+         
+      </div>
+    </div>
+
+    <div class="col-md-3 pt-5 pe-8">
+
+        <div class="image-box">
+
+
+       
+
+        <label class=" col-form-label fw-bold fs-6">Gallerie d 'image</label><br>
+
+        <div style="display:inline-block">
+            <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" style="width:80px">
+        </div>
+
+      </div>
+        <input class="form-control"  type="file" multiple (change)="detectFiles($event)">
+
+
+
+    </div>
+
+</div>
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+          <button
+            type="button"
+            class="btn btn-primary"
+
+            [disabled]="profileForm.invalid"
+        
+  
+            (click)="uploadFiles()"
+       
+          >
+         <span *ngIf="isLoading==false">Enregister</span>
+            <div *ngIf="isLoading==true"> 
+              <span class="indicator-progress" [style.display]="'block'">
+             Veuillez patienter...{{ " " }}
+                <span
+                  class="spinner-border spinner-border-sm align-middle ms-2"
+                ></span>
+              </span>
+            </div>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  
+  
+  

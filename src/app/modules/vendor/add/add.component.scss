@@ -1,0 +1,31 @@
+.panel-heading-one .accordion-toggle:after{
+    font-family: 'Glyphicons Halflings';
+    content: "\e114"; 
+    float: right;        
+    color: #ffffff;         
+    height: 24px;
+    width: 40px;
+    background-color: #000000;
+}
+
+.panel-heading-one .accordion-toggle[aria-expanded="true"]:after {
+        /* symbol for "opening" panels */
+        content: "\e113";
+    }
+
+.panel-heading-one .accordion-toggle[aria-expanded="false"]:after {
+    /* symbol for "collapsed" panels */
+    content: "\e114";
+}
+
+.accordion-button:after {
+    flex-shrink: 0;
+    width: var(--bs-accordion-btn-icon-width);
+    height: var(--bs-accordion-btn-icon-width);
+    margin-left: auto;
+    content: "";
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: var(--bs-accordion-btn-icon-width);
+    transition: var(--bs-accordion-btn-icon-transition);
+}

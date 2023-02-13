@@ -1,0 +1,383 @@
+<div class="card mb-5 mb-xl-10">
+    <div 
+      class="card-header border-0 cursor-pointer"
+      role="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#kt_account_profile_details"
+      aria-expanded="true"
+      aria-controls="kt_account_profile_details"
+    >
+      <div class="card-title m-0">
+        <h3 class="fw-bolder m-0">Ajouter un vendeur</h3>
+      </div>
+    </div>
+    <div id="kt_account_profile_details" class="collapse show">
+      <form  novalidate="" class="form" [formGroup]="profileForm">
+     
+
+        
+        <div class="card-body border-top p-9">
+         
+          <ngb-accordion  activeIds="static-1" #acc="ngbAccordion">
+            
+          <ngb-panel id="static-1" title="Information générale">
+          <ng-template ngbPanelContent>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
+            <div class="col-lg-8">
+            
+  
+                <img  [src]="imgURL" (click)="triggerFile()"   class="rounded-circle img-fluid img-thumbnail"  style="height:150px;width: 150px;"  id="preview" >
+      
+              
+  
+                <div class="mb-3 mt-2">
+                  <span style="color:red;" ></span>
+                
+                  <input style="display: none !important;"  #fileInput   class="form-control"  #file type="file" accept='image/*'  id="formFile" (change)="selectFile($event,file.files)"  /> 
+                </div>
+          
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Nom</label
+            >
+            <div class="col-lg-8">
+              <div class="row">
+                <div class="col-lg-12 fv-row">
+                  <input
+                    type="text"
+                    class="
+                      form-control form-control-lg form-control-solid
+                      mb-3 mb-lg-0
+                    "
+                    placeholder="Nom"
+                    formControlName="nom"
+                    [ngClass]="{
+                        'is-invalid': profileForm.controls['nom'].invalid && profileForm.controls['nom'].touched ,
+                        'is-valid': profileForm.controls['nom'].valid && profileForm.controls['nom'].touched 
+                      }"
+                 
+                  />
+                </div>
+              
+              </div>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Numéro CNI</label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="num_cni"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['num_cni'].invalid && profileForm.controls['num_cni'].touched ,
+                    'is-valid': profileForm.controls['num_cni'].valid && profileForm.controls['num_cni'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              ><span class="required">Email</span></label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Email"
+                name="contactPhone"
+                formControlName="email"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['email'].invalid && profileForm.controls['email'].touched ,
+                    'is-valid': profileForm.controls['email'].valid && profileForm.controls['email'].touched 
+                  }"
+         
+        
+              />
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              ><span class="required">Numéro de telephone</span></label
+            >
+            <div class="col-lg-8 fv-row">
+
+          
+              <input
+            
+          
+              class="form-control form-control-lg form-control-solid"
+                placeholder="Numéro de telephone"
+                name="contactPhone"
+                formControlName="num_tel"
+                (click)="test()"
+
+                ng2TelInput 
+                [ng2TelInputOptions]="{initialCountry: 'cm'}"
+                (intlTelInputObject)="telInputObject($event)"
+                (countryChange)="onCountryChange($event)"
+
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['num_tel'].invalid && profileForm.controls['num_tel'].touched ,
+                    'is-valid': profileForm.controls['num_tel'].valid && profileForm.controls['num_tel'].touched 
+                  }"
+              
+         
+         
+              />
+            </div>
+          </div>
+     
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              ><span >Pays</span></label
+            >
+            <div class="col-lg-8 fv-row">
+              <select
+                class="form-select form-select-solid form-select-lg fw-bold"
+                name="country"
+                formControlName="pays"
+            
+              >
+              <option value="">Selectionner un pays...</option>
+          <option  *ngFor="let country of countrie"  [value]="country.name">{{country.name}}</option> -
+              </select>
+              <!-- <div class="fv-plugins-message-container">
+                <div class="fv-help-block">Country is required</div>
+              </div> -->
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Ville</label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="ville"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['ville'].invalid && profileForm.controls['ville'].touched ,
+                    'is-valid': profileForm.controls['ville'].valid && profileForm.controls['ville'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              >Quartier</label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="quartier"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['quartier'].invalid && profileForm.controls['quartier'].touched ,
+                    'is-valid': profileForm.controls['quartier'].valid && profileForm.controls['quartier'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              >Lieu dit</label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+         
+                formControlName="lieu_dit"
+                [ngClass]="{
+                    'is-invalid': profileForm.controls['lieu_dit'].invalid && profileForm.controls['lieu_dit'].touched ,
+                    'is-valid': profileForm.controls['lieu_dit'].valid && profileForm.controls['lieu_dit'].touched 
+                  }"
+        
+              />
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              ><span >Type de vendeur</span></label
+            >
+            <div class="col-lg-8 fv-row">
+              <select
+                class="form-select form-select-solid form-select-lg fw-bold"
+                name="country"
+                formControlName="type_vendeur"
+            
+              >
+              <option value="">Selectionner un type de vendeur...</option>
+                        <option   value="1">Grossiste</option> 
+                        <option   value="2">Boutique</option> -
+              </select>
+              <!-- <div class="fv-plugins-message-container">
+                <div class="fv-help-block">Country is required</div>
+              </div> -->
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Categorie</label
+            >
+
+            <div class="">
+         
+              <ul style="list-style-type: none !important;">
+                <ng-container
+                  *ngTemplateOutlet="recursiveListTmpl; context:{ list: donne_arange }"
+                ></ng-container>
+              </ul>
+
+              <ng-template #recursiveListTmpl let-list="list">
+              <li *ngFor="let item of list">
+                <input     formControlName="id_categorie" type="radio" name="id_categorie" [value]="item.id_categorie">  {{ item.name }}
+                  <ul style="list-style-type: none !important;" *ngIf="item.children.length > 0">
+                    <ng-container
+                      *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"
+                    ></ng-container>
+                  </ul>
+                </li>
+              </ng-template>
+
+
+
+
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel id="static-2">
+        <ng-template ngbPanelTitle>
+          <span>Transport</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label  fw-bold fs-6"
+              >Le vendeur possede t-il un trasporteur ? </label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+              class="form-check-input" [checked]="trans == 1" type="checkbox" value="promo" id="flexCheckDefault"
+                   value="1"
+                   (change)="changeStatus($event)"
+             
+              />
+            </div>
+          </div>
+
+          <div *ngIf="trans==1">
+            <div class="row mb-6">
+              <label class="col-lg-4 col-form-label fw-bold fs-6"
+                ><span class="required">Numéro  transporteur</span></label
+              >
+              <div class="col-lg-8 fv-row">
+  
+            
+                <input
+              
+            
+                class="form-control form-control-lg form-control-solid"
+                  placeholder="Numéro de telephone"
+                  name="contactPhone"
+                  formControlName="num_trans"
+                  (click)="test()"
+  
+                  ng2TelInput 
+                  [ng2TelInputOptions]="{initialCountry: 'cm'}"
+                  (intlTelInputObject)="telInputObject($event)"
+                  (countryChange)="onCountryChange2($event)"
+  
+                  [ngClass]="{
+                      'is-invalid': profileForm.controls['num_trans'].invalid && profileForm.controls['num_trans'].touched ,
+                      'is-valid': profileForm.controls['num_trans'].valid && profileForm.controls['num_trans'].touched 
+                    }"
+                
+           
+           
+                />
+              </div>
+            </div>
+
+          </div>
+
+
+         
+        </ng-template>
+      </ngb-panel>
+
+
+      </ngb-accordion>
+
+
+         
+      </div>
+        <div class="card-footer d-flex justify-content-end py-6 px-9" >
+          <button
+         
+            type="button"
+            class="btn btn-primary"
+
+            [disabled]="profileForm.invalid"
+        
+  
+            (click)="open(content)"
+       
+          >
+         <span *ngIf="isLoading==false">Enregister</span>
+            <div *ngIf="isLoading==true"> 
+              <span class="indicator-progress" [style.display]="'block'">
+             Veuillez patienter...{{ " " }}
+                <span
+                  class="spinner-border spinner-border-sm align-middle ms-2"
+                ></span>
+              </span>
+            </div>
+          </button>
+        </div>
+
+
+ 
+
+      </form>
+    </div>
+  </div>
+  
+  
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">*Information</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <p>Voulez vous enregistrer la position actuelle comme celle du vendeur ?.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="choix(0)">Non</button>
+      <button type="button" class="btn btn-light"(click)="choix(1)"data-bs-dismiss="modal">Oui</button>
+    </div>
+  </ng-template>
+
+
+
+
+  

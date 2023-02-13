@@ -1,0 +1,172 @@
+<!-- begin::Header -->
+
+<div class="card-header border-0 pt-5">
+    <h3 class="card-title align-items-start flex-column">
+      <span class="card-label fw-bolder fs-3 mb-1">Mes vendeurs</span>
+      <span class="text-muted mt-1 fw-bold fs-7"> {{nb}} Vendeurs</span>
+    </h3>
+    <div
+      class="card-toolbar"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      data-bs-trigger="hover"
+      title="Click to add a user"
+    >
+      <a routerLink="/partner/add"  class="btn btn-sm btn-light-primary">
+        <span
+          [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'"
+          class="svg-icon svg-icon-3"
+        ></span>
+      Nouveau partenaire
+      </a>
+    </div>
+  </div>
+  <!-- end::Header -->
+  <!-- begin::Body -->
+  <div class="card-body py-3">
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table
+        class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
+      >
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="fw-bolder text-muted">
+            <th class="w-25px">
+              <div
+                class="
+                  form-check form-check-sm form-check-custom form-check-solid
+                "
+              >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="1"
+                  data-kt-check="true"
+                  data-kt-check-target=".widget-9-check"
+                />
+              </div>
+            </th>
+            <th class="min-w-150px">Noms</th>
+            <th class="min-w-140px">Email</th>
+            <th class="min-w-120px">Telephone</th>
+            <th class="min-w-100px text-end">Actions</th>
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody>
+          <tr *ngFor="let agent of donne">
+            <td>
+              <div
+                class="
+                  form-check form-check-sm form-check-custom form-check-solid
+                "
+              >
+                <input
+                  class="form-check-input widget-9-check"
+                  type="checkbox"
+                  value="1"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="symbol symbol-45px me-5">
+                  <img [src]="myphoto(agent.photo)" alt="" />
+                </div>
+                <div class="d-flex justify-content-start flex-column">
+                  <a href="#" class="text-dark fw-bolder text-hover-primary fs-6" [routerLink]="['/vendor/account',agent.id_vendeur]">
+                  {{agent.nom}}   {{agent.prenom}}
+                  </a>
+                  <span class="text-muted fw-bold text-muted d-block fs-7">
+                  {{agent.ville}}
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block fs-6"
+              >
+               {{agent.email}}
+              </a>
+        
+            </td>
+            <td class="text-end">
+              <div class="d-flex flex-column w-100 me-2">
+                <div class="d-flex flex-stack mb-2">
+                  <span class="text-muted me-2 fs-7 fw-bold">{{agent.num_tel}}</span>
+                </div>
+              
+              </div>
+            </td>
+            <td>
+              <div class="d-flex justify-content-end flex-shrink-0">
+                <a
+                  href="#"
+                  [routerLink]="['/vendor/account',agent.id_vendeur]"
+                  class="
+                    btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                    me-1
+                  "
+                >
+                  <span
+
+                  [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                    class="svg-icon svg-icon-3"
+                  ></span>
+                </a>
+                <a
+                
+                  (click)="open(content,agent.id_vendeur)"
+                  class="
+                    btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                    me-1
+                  "
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/icons/duotune/maps/map008.svg'"
+                    class="svg-icon svg-icon-3"
+                  ></span>
+                </a>
+                <a
+                  href="#"
+                  class="
+                    btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  "
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/icons/duotune/general/gen027.svg'
+                    "
+                    class="svg-icon svg-icon-3"
+                  ></span>
+                </a>
+              </div>
+            </td>
+          </tr>
+          
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+    </div>
+    <!-- end::Table container -->
+  </div>
+  <!-- begin::Body -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">*Information</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <p>Voulez vous enregistrer la position actuelle  comme celle du vendeur selectionné ? ?.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="updatePosition()" >Oui</button>
+      <button type="button" class="btn btn-light" data-bs-dismiss="modal">Non</button>
+    </div>
+  </ng-template>

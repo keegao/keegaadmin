@@ -1,0 +1,213 @@
+<div class="card mb-5 mb-xl-10">
+  <div
+    class="card-header border-0 cursor-pointer"
+    role="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#kt_account_profile_details"
+    aria-expanded="true"
+    
+    aria-controls="kt_account_profile_details"
+  >
+    <div class="card-title m-0">
+      <h3 class="fw-bolder m-0">Details du profil</h3>
+    </div>
+  </div>
+  <div id="kt_account_profile_details" class="collapse show">
+    <form novalidate="" class="form">
+      <div class="card-body border-top p-9">
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
+          <div class="col-lg-8">
+          
+
+            <img  [src]="myphoto" (click)="triggerFile()"   class="rounded-circle img-fluid img-thumbnail"  style="height:150px;width: 150px;"  id="preview" >
+    
+            <!--    <div
+                class="image-input-wrapper w-125px h-125px"
+                [style.background-image]="
+                  'url('+myphoto+')'
+                "
+                (change)="selectFile($event,file.files)"
+              ></div> - -->
+
+              <div class="mb-3 mt-2">
+                <span style="color:red;" *ngIf="message">{{message}}</span>
+              
+                <input style="display: none !important;"  #fileInput   (change)="selectFile($event,file.files)" class="form-control"  #file type="file" accept='image/*'  id="formFile" /> 
+              </div>
+
+
+
+
+        
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label required fw-bold fs-6"
+            >Nom</label
+          >
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-6 fv-row">
+                <input
+                  type="text"
+                  class="
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0
+                  "
+                  placeholder="First name"
+                  name="fName"
+                  [value]="user?.nom"
+                  [(ngModel)]="nom"
+                />
+              </div>
+              <div class="col-lg-6 fv-row">
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  placeholder="Last name"
+                  name="lName"
+                  [value]="user?.prenom"
+
+                  [(ngModel)]="prenom"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label required fw-bold fs-6"
+            >Numéro CNI</label
+          >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+       
+              name="company"
+              [value]="user?.num_cni"
+
+              [(ngModel)]="num_cni"
+            />
+          </div>
+        </div>
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="required">Type</span></label
+          >
+          <div class="col-lg-8 fv-row">
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              placeholder="Phone number"
+              name="contactPhone"
+              [value]="user?.type==1?'Adminsitrateur':'Agent Commercial'"
+              readonly
+            />
+          </div>
+        </div>
+   
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            ><span class="required">Pays</span></label
+          >
+          <div class="col-lg-8 fv-row">
+            <select
+              class="form-select form-select-solid form-select-lg fw-bold"
+              name="country"
+              [(ngModel)]="mycount"
+            >
+            <option value="">Selectionner un pays...</option>
+             <option  *ngFor="let country of countrie"  [value]="country.name">{{country.name}}</option>
+            </select>
+            <!-- <div class="fv-plugins-message-container">
+              <div class="fv-help-block">Country is required</div>
+            </div> -->
+          </div>
+        </div>
+      
+  
+        <div class="row mb-6" style="display:none">
+          <label class="col-lg-4 col-form-label required fw-bold fs-6"
+            >Monnaie </label
+          >
+          <div class="col-lg-8 fv-row">
+            <select
+              class="form-select form-select-solid form-select-lg"
+              name="currency"
+            >
+              <option value="">Selectionner une monnaie.</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="USD">USD - Dollar USQ</option>
+              <option value="XAF">XAF- Franc CFA</option>
+          
+    
+            </select>
+          </div>
+        </div>
+        <div style="display: none;">
+        <div class="row mb-6">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            >Communication</label
+          >
+          <div class="col-lg-8 fv-row">
+            <div class="d-flex align-items-center mt-3">
+              <label class="form-check form-check-inline form-check-solid me-5"
+                ><input
+                  class="form-check-input"
+                  name="communication[]"
+                  type="checkbox"
+                /><span class="fw-bold ps-2 fs-6">Email</span></label
+              ><label class="form-check form-check-inline form-check-solid"
+                ><input
+                  class="form-check-input"
+                  name="communication[]"
+                  type="checkbox"
+                /><span class="fw-bold ps-2 fs-6">Phone</span></label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row mb-0">
+          <label class="col-lg-4 col-form-label fw-bold fs-6"
+            >Allow Marketing</label
+          >
+          
+          <div class="col-lg-8 d-flex align-items-center">
+            <div class="form-check form-check-solid form-switch fv-row">
+              <input
+                class="form-check-input w-45px h-30px"
+                type="checkbox"
+                id="allowmarketing"
+              /><label class="form-check-label"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="isLoading"
+
+          (click)="uploadFiles()"
+     
+        >
+          <span *ngIf="isLoading==false">Sauvegarder les modifications</span>
+          <div *ngIf="isLoading==true">
+            <span class="indicator-progress" [style.display]="'block'">
+           Veuillez patienter...{{ " " }}
+              <span
+                class="spinner-border spinner-border-sm align-middle ms-2"
+              ></span>
+            </span>
+          </div>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
